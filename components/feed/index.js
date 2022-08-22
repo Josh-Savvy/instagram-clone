@@ -7,6 +7,7 @@ const Feed = () => {
       {posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}
+      
     </section>
   )
 }
