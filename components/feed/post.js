@@ -34,7 +34,7 @@ const Post = ({ post, user }) => {
       </div>
       {/* Posted Image */}
       <div className="relative -mx-5 aspect-square overflow-hidden">
-        <img className="w-full" src={`https://random.imagecdn.app/1080/11${Math.floor(
+        <img className="w-screen" src={`https://random.imagecdn.app/1080/11${Math.floor(
           Math.random() * 100
         )}`} alt={post.first_name} />
       </div>
