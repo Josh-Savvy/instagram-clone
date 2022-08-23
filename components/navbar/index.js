@@ -14,7 +14,10 @@ const Navbar = () => {
       <div className="flex items-center gap-5">
         <ul className="sm:flex items-center gap-5 hidden">
           <Path Icon={HomeIcon} />
-          <Path Icon={MessengerIcon} />
+          <div className="relative">
+            <span className="absolute -top-2 px-1.5 text-sm rounded-full bg-red-400 -right-2 text-white font-semibold">4</span>
+            <Path Icon={MessengerIcon} />
+          </div>
           <Path Icon={PostIcon} />
           <Path Icon={ExploreIcon} />
           <Path Icon={HeartIcon} />

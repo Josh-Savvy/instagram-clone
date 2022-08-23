@@ -4,6 +4,7 @@ import Panel from '../components/panel'
 import StoryBoard from '../components/story-board'
 
 const App = () => {
+
   return (
     <Layout>
       <div className="space-y-3 lg:mx-0">
@@ -14,5 +15,4 @@ const App = () => {
     </Layout>
   )
 }
-
 export default App

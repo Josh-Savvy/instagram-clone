@@ -1,10 +1,10 @@
-export const HeartIcon = () => {
+export const HeartIcon = ({ onclick, likeBg }) => {
   return (
     <svg
+      style={{ fill: likeBg }}
+      onClick={onclick}
       aria-label="Like"
       className="cursor-pointer hover:opacity-50"
-      color="#0F172A"
-      fill="#0F172A"
       height="24"
       role="img"
       viewBox="0 0 24 24"
