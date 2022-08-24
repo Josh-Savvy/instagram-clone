@@ -1,4 +1,5 @@
 import Link from "next/link"
+import axios from "axios"
 import { DotsHorizontalIcon } from '@heroicons/react/outline'
 import {
   BookmarkIcon,
@@ -9,6 +10,7 @@ import {
 } from './icons'
 import { useState } from "react"
 import { useMemo } from "react"
+import { useEffect } from "react"
 
 const Post = ({ post, user }) => {
   const [state, setState] = useState({
@@ -16,29 +18,42 @@ const Post = ({ post, user }) => {
     liked: false
   })
   const { likeBg, liked } = state
-  const postLikes = useMemo(() => Math.floor(Math.random() * 200), [])
+  const [desc, setDesc] = useState("")
+
+  const postLikes = useMemo(() => Math.floor(Math.random() * 333), [])
+
   const postCreatedOn = useMemo(() => Intl.DateTimeFormat('sv-SE').format(new Date().setDate(new Date().getDate() - Math.floor(Math.random() * 1000))), [])
+
+  const PostDescription = async () => {
+    await axios.get("https://type.fit/api/quotes").then((response) => {
+      setDesc(response)
+      console.log(response)
+    }
+    )
+  }
+
+  useEffect(() => {
+    PostDescription()
+  }, [])
+
   return (
     <div className="relative card space-y-4 select-none">
-      {/* Heading */}
       <div className="flex justify-between items-center">
-        <Link href={`/user/profile/${post.id}`}>
-          <div className="flex gap-3 items-center -m-2">
-            <div className="w-8 h-8 overflow-hidden rounded-full cursor-pointer">
-              <img className="w-full" src={post.avatar} alt={post.avatar} />
-            </div>
-            <h2 className=" font-semibold cursor-pointer">{`${post.first_name} ${post.last_name}`}</h2>
+        {/* <Link href={`/user/profile/${post.id}`}> */}
+        <div className="flex gap-3 items-center -m-2">
+          <div className="w-8 h-8 overflow-hidden rounded-full cursor-pointer">
+            <img className="w-full" src={post.avatar} alt={post.avatar} />
           </div>
-        </Link>
+          <h2 className=" font-semibold cursor-pointer">{`${post.first_name} ${post.last_name}`}</h2>
+        </div>
+        {/* </Link> */}
         <DotsHorizontalIcon className="w-5 h-5 cursor-pointer" />
       </div>
-      {/* Posted Image */}
       <div className="relative -mx-5 aspect-square overflow-hidden">
         <img className="w-screen" src={`https://random.imagecdn.app/1080/11${Math.floor(
           Math.random() * 100
         )}`} alt={post.first_name} />
       </div>
-      {/* Actions */}
       <div className="space-y-2">
         <div className="flex justify-between mb-2">
           <div className="flex items-center gap-4">
@@ -51,7 +66,7 @@ const Post = ({ post, user }) => {
         <span className=" font-semibold">{`${liked ? postLikes++ : postLikes -= 1} likes`}</span>
         <p>
           <span className="font-semibold">{`${post.first_name} ${post.last_name}`} </span>
-          {post.description}
+          {desc ? desc.data[Math.floor(Math.random() * 10) + 1].text : ""}
         </p>
         <h3 className="text-xs text-gray-500">{postCreatedOn}</h3>
       </div>

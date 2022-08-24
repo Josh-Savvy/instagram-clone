@@ -22,7 +22,7 @@ const Navbar = () => {
           <Path Icon={ExploreIcon} />
           <Path Icon={HeartIcon} />
         </ul>
-        <MenuAlt4Icon className="w-6 sm:hidden" />
+        {/* <MenuAlt4Icon className="w-6 sm:hidden" /> */}
         <Profile />
       </div>
     </nav>
